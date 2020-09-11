@@ -5,7 +5,8 @@ import {FiChevronLeft, FiChevronRight} from 'react-icons/fi';
 import api from '../../services/api';
 import logo from '../../assets/logo.svg';
 
-import {Header, RepositoryInfo, Issues} from './style';
+import {Header} from '../../styles/global';
+import {RepositoryInfo, Issues} from './style';
 
 interface RepositoryParams{
   repository: string;
@@ -56,7 +57,7 @@ const Repository: React.FC = () => {
         <img src={logo} alt="GitHub Explorer" />
         <Link to="/">
           <FiChevronLeft size={16} />
-          Voltar
+          Dashboard
         </Link>
       </Header>
 

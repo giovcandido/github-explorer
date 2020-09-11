@@ -5,7 +5,8 @@ import {FiChevronRight} from 'react-icons/fi';
 import api from '../../services/api';
 import logo from '../../assets/logo.svg';
 
-import {Title, Form, Repositories, Error} from './styles';
+import {Header, Title} from '../../styles/global';
+import {Form, Repositories, Error} from './styles';
 
 interface Repository{
   full_name: string;
@@ -56,7 +57,14 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <img src={logo} alt="GitHub Explorer" />
+       <Header>
+        <img src={logo} alt="GitHub Explorer" />
+        <Link to="/saved">
+          <FiChevronRight size={16} />
+          Saved Repositories
+        </Link>
+      </Header>
+
       <Title>Explore repositories on GitHub</Title>
 
       <Form hasError={Boolean(inputError)} onSubmit={handleNewRepoSearch}>
