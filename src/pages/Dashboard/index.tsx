@@ -1,12 +1,14 @@
 import React, {useState, useEffect, FormEvent} from 'react';
 import {Link} from 'react-router-dom';
+
 import {FiChevronRight} from 'react-icons/fi';
+import {AiOutlinePushpin, AiFillPushpin} from 'react-icons/ai';
 
 import api from '../../services/api';
 import logo from '../../assets/logo.svg';
 
-import {Header, Title, Repositories} from '../../styles/global';
-import {Form, Error} from './styles';
+import {Header, Title} from '../../styles/global';
+import {Repositories, RepositoryInfo, Form, Error} from './styles';
 
 interface Repository{
   full_name: string;
@@ -22,18 +24,18 @@ const Dashboard: React.FC = () => {
   const [inputError, setInputError] = useState('');
   const [searchResult, setSearchResult] = useState<Repository[]>([]);
 
-  // const [repositories, setRepositories] = useState<Repository[]>(() => {
-  //   const storagedRepositories = localStorage.getItem('@github-explorer:repositories');
-  //     if(storagedRepositories){
-  //       return JSON.parse(storagedRepositories);
-  //     }
+  const [savedRepos, setSavedRepos] = useState<Repository[]>(() => {
+    const storagedRepositories = localStorage.getItem('@github-explorer:repositories');
+      if(storagedRepositories){
+        return JSON.parse(storagedRepositories);
+      }
 
-  //     return [];
-  // });
+      return [];
+  });
 
-  // useEffect(() => {
-  //   localStorage.setItem('@github-explorer:repositories', JSON.stringify(repositories));
-  // }, [repositories]);
+  useEffect(() => {
+    localStorage.setItem('@github-explorer:repositories', JSON.stringify(savedRepos));
+  }, [savedRepos]);
 
   async function handleNewRepoSearch(event: FormEvent<HTMLFormElement>): Promise<void>{
     event.preventDefault();
@@ -58,6 +60,10 @@ const Dashboard: React.FC = () => {
     }
   } 
 
+  async function handleRepoSaving(repoFullName: string): Promise<void>{
+    console.log('Saving ' + repoFullName);
+  }
+
   return (
     <>
        <Header>
@@ -81,14 +87,19 @@ const Dashboard: React.FC = () => {
 
       <Repositories>
         {searchResult.map(repository => (
-          <Link key={repository.full_name} to={`/repository/${repository.full_name}`}>
-            <img src={repository.owner.avatar_url} alt={repository.owner.login} />
-            <div>
-              <strong>{repository.full_name}</strong>
-              <p>{repository.description}</p>
-            </div>
-            <FiChevronRight size={20} />
-          </Link>
+          <RepositoryInfo>
+            <button onClick={() => handleRepoSaving(repository.full_name)}>
+              <AiOutlinePushpin size={20} />
+            </button>
+            <Link key={repository.full_name} to={`/repository/${repository.full_name}`}>
+              <img src={repository.owner.avatar_url} alt={repository.owner.login} />
+              <div>
+                <strong>{repository.full_name}</strong>
+                <p>{repository.description}</p>
+              </div>
+              <FiChevronRight size={20} />
+            </Link>
+          </RepositoryInfo>
         ))}
       </Repositories>
     </>
