@@ -60,8 +60,17 @@ const Dashboard: React.FC = () => {
     }
   } 
 
-  async function handleRepoSaving(repoFullName: string): Promise<void>{
-    console.log('Saving ' + repoFullName);
+  async function handleRepoSaving(repo: Repository): Promise<void>{
+    const repoIndex = savedRepos.findIndex(repository => {
+      return repository.full_name === repo.full_name
+    });
+
+    if(repoIndex !== -1){
+      savedRepos.splice(repoIndex, 1);
+      setSavedRepos([...savedRepos]);
+    }else{
+      setSavedRepos([repo, ...savedRepos]);
+    }
   }
 
   return (
@@ -87,11 +96,9 @@ const Dashboard: React.FC = () => {
 
       <Repositories>
         {searchResult.map(repository => (
-          <RepositoryInfo>
-            <button onClick={() => handleRepoSaving(repository.full_name)}>
-              <AiOutlinePushpin size={20} />
-            </button>
-            <Link key={repository.full_name} to={`/repository/${repository.full_name}`}>
+          <RepositoryInfo key={repository.full_name}>
+            <button onClick={() => handleRepoSaving(repository)} />
+            <Link to={`/repository/${repository.full_name}`}>
               <img src={repository.owner.avatar_url} alt={repository.owner.login} />
               <div>
                 <strong>{repository.full_name}</strong>
