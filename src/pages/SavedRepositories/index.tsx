@@ -4,7 +4,8 @@ import {FiChevronLeft, FiChevronRight} from 'react-icons/fi';
 
 import logo from '../../assets/logo.svg';
 
-import {Header, Title, Repositories} from '../../styles/global';
+import {Header, Title} from '../../styles/global';
+import {Repositories} from './style';
 
 interface Repository{
   full_name: string;
