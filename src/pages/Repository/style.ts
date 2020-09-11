@@ -48,12 +48,25 @@ export const RepositoryInfo = styled.section`
         color: #737380;
         margin-top: 4px;
       }
+
+      a{
+        text-decoration: none;
+        margin-top: 8px;
+        display: block;
+        color: #a8a8b3;
+        transition: color 0.2s;
+
+        &:hover{
+          color: #666;
+        }
+      }
     }
   }
 
   ul{
     display: flex;
     list-style: none;
+    margin-top: 24px;
     
     li{
       & + li{
