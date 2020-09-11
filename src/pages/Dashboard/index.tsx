@@ -20,38 +20,41 @@ interface Repository{
 const Dashboard: React.FC = () => {
   const [newRepoSearch, setNewRepoSearch] = useState('');
   const [inputError, setInputError] = useState('');
-  const [repositories, setRepositories] = useState<Repository[]>(() => {
-  const storagedRepositories = localStorage.getItem('@github-explorer:repositories');
-    if(storagedRepositories){
-      return JSON.parse(storagedRepositories);
-    }
+  const [searchResult, setSearchResult] = useState<Repository[]>([]);
 
-    return [];
-  });
+  // const [repositories, setRepositories] = useState<Repository[]>(() => {
+  //   const storagedRepositories = localStorage.getItem('@github-explorer:repositories');
+  //     if(storagedRepositories){
+  //       return JSON.parse(storagedRepositories);
+  //     }
 
-  useEffect(() => {
-    localStorage.setItem('@github-explorer:repositories', JSON.stringify(repositories));
-  }, [repositories]);
+  //     return [];
+  // });
+
+  // useEffect(() => {
+  //   localStorage.setItem('@github-explorer:repositories', JSON.stringify(repositories));
+  // }, [repositories]);
 
   async function handleNewRepoSearch(event: FormEvent<HTMLFormElement>): Promise<void>{
     event.preventDefault();
-    
+
     if(!newRepoSearch){
-      setInputError('Type in a repository to be searched. Format: author/repo_name.');
+      setInputError('Type in a repository to be searched.');
       return;
     }
     
     try{
-      const response = await api.get<Repository>(`repos/${newRepoSearch}`);
-  
-      const repository = response.data;
+      const response = await api.get(`search/repositories?q=${newRepoSearch}&per_page=50&sort=stars&order=desc`);
+
+      const repositories: Repository[] = response.data.items;
       
-      setRepositories([repository, ...repositories]);
-      
+      setSearchResult([...repositories]);
+
       setNewRepoSearch('');
       setInputError('');
     }catch(err){
-      setInputError('Cannot find the given repository. It may not exist.');
+      console.log(err);
+      setInputError('No repository was found. Try using other words.');
     }
   } 
 
@@ -75,9 +78,9 @@ const Dashboard: React.FC = () => {
       </Form>
 
       {inputError && <Error>{inputError}</Error>}
-      
+
       <Repositories>
-        {repositories.map(repository => (
+        {searchResult.map(repository => (
           <Link key={repository.full_name} to={`/repository/${repository.full_name}`}>
             <img src={repository.owner.avatar_url} alt={repository.owner.login} />
             <div>
