@@ -26,7 +26,7 @@ In order to use it, you have to download it to your machine and follow the insta
 
 After installation, open the web app and serching for the repository you want to get information about. If the search is successful, a repository card shows up in the front page. Otherwise, you may see an error message.
 
-Bear in mind you have to search repositories using the format: username/reponame, where _username_ is the GitHub user that owns the repository and _reponame_ is the name of the repository.
+Bear in mind you have to search repositories using the format: username/reponame, where __username__ is the GitHub user that owns the repository and __reponame__ is the name of the repository.
 
 The repositories are stored to your browser local storage. If want to delete your search results, you have to wipe the local storage manually.
 
@@ -38,7 +38,7 @@ No API key is required in order to run the web app, so chill out.
 
 Clone the repository or download the source code to your machine.
 
-After having the the app locally, you can run it with _yarn_.
+After having the the app locally, you can run it with __yarn__.
 
 In order to do so, first you need to install yarn. Check the installation process [here](https://classic.yarnpkg.com/lang/en/docs/install/).
 
