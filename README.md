@@ -1,46 +1,62 @@
 # GitHub Explorer
-This project is part of Rocketseat GoStack course.
 
-It was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+    <img src="https://github.com/giovcandido/github-explorer/blob/master/demos/demo.gif" alt="GitHub Explorer in action">
+</p>
 
-## Available Scripts
+Explore GitHub repositories freely. It's really free.
 
-In the project directory, you can run:
+## Contents
 
-### `yarn start`
+- [About](#about)
+- [Usage](#usage)
+- [Installation](#installation)
+- [Contribute](#contribute)
+- [More](#more)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## About
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+GitHub repository explorer is a web app that lets you browse any public repository and automatically saves them to your local storage so you can easily find them later. It's made with ReactJS through GitHub public API.
 
-### `yarn test`
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
 
-### `yarn build`
+In order to use it, you have to download it to your machine and follow the installation process.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+After installation, open the web app and serching for the repository you want to get information about. If the search is successful, a repository card shows up in the front page. Otherwise, you may see an error message.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Bear in mind you have to search repositories using the format: username/reponame, where _username_ is the GitHub user that owns the repository and _reponame_ is the name of the repository.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The repositories are stored to your browser local storage. If want to delete your search results, you have to wipe the local storage manually.
 
-### `yarn eject`
+You can click in a repository card to go to another page with more information about the repository.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+No API key is required in order to run the web app, so chill out.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Installation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Clone the repository or download the source code to your machine.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+After having the the app locally, you can run it with _yarn_.
 
-## Learn More
+In order to do so, first you need to install yarn. Check the installation process [here](https://classic.yarnpkg.com/lang/en/docs/install/).
+
+Now, with yarn installed, open the source code directory in your terminal and run:
+```bash
+yarn install
+```
+
+Now, all you have to do is running:
+```bash
+yarn start
+```
+
+## Contribute
+
+Feel free to reach out and contribute. We can add more features to GitHub Explorer.
+
+## More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
